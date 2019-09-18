@@ -14,7 +14,7 @@ The pod operator manages the pods applied to Kubernetes and automates tasks rela
  ### Create and Destroy Pods
  Three pods would be created as requirement specified in the tony_v1alpha1_server_cr.yaml.
  ```sh
-    $ kubectl apply -f /root/go/src/github.com/pod-operator/tony-operator/deploy/crds/tony_v1alpha1_server_cr.yaml 
+    $ kubectl apply -f ./pod-operator/tony-operator/deploy/crds/tony_v1alpha1_server_cr.yaml
     $ kubectl get pods
     NAME                           READY    STATUS    RESTARTS   AGE
     example-server-pod-1137         1/1     Running   0          9m22s
@@ -39,7 +39,7 @@ The pod operator manages the pods applied to Kubernetes and automates tasks rela
       port: 80
  ```
  ```sh
-    $ kubectl apply -f /root/go/src/github.com/pod-operator/tony-operator/deploy/crds/tony_v1alpha1_server_cr.yaml
+    $ kubectl apply -f ./pod-operator/tony-operator/deploy/crds/tony_v1alpha1_server_cr.yaml
     $ kubectl get pods
     NAME                            READY   STATUS    RESTARTS   AGE
     example-server-pod-1137         1/1     Running   0          30m
