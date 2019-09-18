@@ -81,7 +81,7 @@ This function is used to create a new pod for the cluster when a running pod is 
   - Ubuntu under v18.0.0 seems not to work for Operator SDK.
 
 ## Create and deploy a pod-operator
-#### Describe the Customer Resource
+### 1. Describe the Customer Resource
 Modify the API: ~/go/src/github.com/pod-operator/tony-operator/pkg/apis/tony/v1alpha1/server_types.go<br>
 It is used to get some custom field for our CR yaml file. Another things is that every time server_types.go is revised, 
 please do not forget to type <b>operator-sdk generate k8s</b> in terminal to create the deep-copy codes. 
@@ -105,11 +105,11 @@ type ServerStatus struct {
 	AppGroup string `json:"appgroup"`
 }
 ```
-#### Write the Logic to the Operator
+### 2. Write the Logic to the Operator
 In this part, ~/go/src/github.com/pod-operator/tony-operator/pkg/controller/server/server_controller.go is modified. 
 The machinism of the operator is designed in here. 
 
-##### 1. Define a function to create a pod
+##### 2.1 Define a function to create a pod
 The main purpose of this function is to define and create the pods via Go.
 ```GO
 /**
@@ -142,7 +142,7 @@ func NewPodForCR(cr *tonyv1alpha1.Server, number int) *corev1.Pod {
 	}
 }
 ```
-##### 2. Retrieve all the pods
+##### 2.2 Retrieve all the pods
 This function is to retrieve all the pods related to the customer resource.
 ```GO
 /**
@@ -161,7 +161,7 @@ func getPodsNames(pods []corev1.Pod) []string {
 
 
 
-##### 3. Logic of reconciliation 
+##### 2.3 Logic of reconciliation 
 This is the most essential part of the operator. The logic of the controller is defined in the following function. 
 However, one things that need to be investigated is the multi-thread problem.
 ```GO
@@ -245,7 +245,7 @@ func (r *ReconcileServer) Reconcile(request reconcile.Request) (reconcile.Result
   return reconcile.Result{Requeue: true}, nil
 }
 ```
-##### 4. Deploy the operator
+### 3. Deploy the operator
 This is the last step to complete the process of operator deployment. 
 You could follow the instructions mentioned in the Operator SDK installation page or doing the following things.
 ```Bash
