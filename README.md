@@ -1,5 +1,4 @@
 # Pod-operator
-# Pod Operator
 # Project status: beta
 Major planned features have been completed. However, potential extension and functions have not been confirmed. 
 This project is aim to understand the operator as beginner level. In the following sections, there would be a guide to 
