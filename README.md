@@ -105,11 +105,11 @@ type ServerStatus struct {
 	AppGroup string `json:"appgroup"`
 }
 ```
-#### Write Logic to the Operator
+#### Write the Logic to the Operator
 In this part, ~/go/src/github.com/pod-operator/tony-operator/pkg/controller/server/server_controller.go is modified. 
 The machinism of the operator is designed in here. 
 
-##### Define a function to create a pod
+##### 1. Define a function to create a pod
 The main purpose of this function is to define and create the pods via Go.
 ```GO
 /**
@@ -142,7 +142,7 @@ func NewPodForCR(cr *tonyv1alpha1.Server, number int) *corev1.Pod {
 	}
 }
 ```
-##### Retrieve all the pods
+##### 2. Retrieve all the pods
 This function is to retrieve all the pods related to the customer resource.
 ```GO
 /**
@@ -161,7 +161,7 @@ func getPodsNames(pods []corev1.Pod) []string {
 
 
 
-##### Logic of reconciliation 
+##### 3. Logic of reconciliation 
 This is the most essential part of the operator. The logic of the controller is defined in the following function. 
 However, one things that need to be investigated is the multi-thread problem.
 ```GO
@@ -245,7 +245,7 @@ func (r *ReconcileServer) Reconcile(request reconcile.Request) (reconcile.Result
   return reconcile.Result{Requeue: true}, nil
 }
 ```
-##### Deploy the operator
+##### 4. Deploy the operator
 This is the last step to complete the process of operator deployment. 
 You could follow the instructions mentioned in the Operator SDK installation page or doing the following things.
 ```Bash
