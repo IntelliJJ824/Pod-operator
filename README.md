@@ -45,7 +45,7 @@ The pod operator manages the pods applied to Kubernetes and automates tasks rela
     example-server-pod-1137         1/1     Running   0          30m
     tony-operator-59c79dbd6-dpj5q   1/1     Running   0          4h46m
 ```
-###Failover the Pods
+### Failover the Pods
 This function is used to create a new pod for the cluster when a running pod is deleted by kubectl.
 ```sh 
    $ kubectl delete pod example-server-pod-1137
@@ -64,7 +64,7 @@ This function is used to create a new pod for the cluster when a running pod is 
   - operator-SDK v0.8.1
   - ubuntu v18+ (TBC)
 
-#Quick Start  
+# Quick Start  
 ## Installation of Operator SDK
   Follow the steps in the [installation guide](https://github.com/operator-framework/operator-sdk/tree/v0.8.1) 
   to learn how to install the Operator SDK.  
@@ -109,7 +109,7 @@ type ServerStatus struct {
 In this part, ~/go/src/github.com/pod-operator/tony-operator/pkg/controller/server/server_controller.go is modified. 
 The machinism of the operator is designed in here. 
 
-#####Define a function to create a pod
+##### Define a function to create a pod
 The main purpose of this function is to define and create the pods via Go.
 ```GO
 /**
@@ -142,7 +142,7 @@ func NewPodForCR(cr *tonyv1alpha1.Server, number int) *corev1.Pod {
 	}
 }
 ```
-#####Retrieve all the pods
+##### Retrieve all the pods
 This function is to retrieve all the pods related to the customer resource.
 ```GO
 /**
@@ -161,7 +161,7 @@ func getPodsNames(pods []corev1.Pod) []string {
 
 
 
-#####Logic of reconciliation 
+##### Logic of reconciliation 
 This is the most essential part of the operator. The logic of the controller is defined in the following function. 
 However, one things that need to be investigated is the multi-thread problem.
 ```GO
@@ -245,7 +245,7 @@ func (r *ReconcileServer) Reconcile(request reconcile.Request) (reconcile.Result
   return reconcile.Result{Requeue: true}, nil
 }
 ```
-#####Deploy the operator
+##### Deploy the operator
 This is the last step to complete the process of operator deployment. 
 You could follow the instructions mentioned in the Operator SDK installation page or doing the following things.
 ```Bash
