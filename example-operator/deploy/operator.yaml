@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tony-operator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: tony-operator
+  template:
+    metadata:
+      labels:
+        name: tony-operator
+    spec:
+      serviceAccountName: tony-operator
+      containers:
+        - name: tony-operator
+          # Replace this with the built image name
+          image: docker.io/zz35/pod-operator
+          command:
+          - tony-operator
+          imagePullPolicy: Always
+          env:
+            - name: WATCH_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: OPERATOR_NAME
+              value: "tony-operator"

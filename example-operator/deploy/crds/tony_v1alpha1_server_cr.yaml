@@ -1,0 +1,11 @@
+apiVersion: "tony.stark.com/v1alpha1"
+kind: "Server"
+metadata:
+  name: "example-server"
+  namespace: default
+spec:
+  # Add fields here
+  count: 2
+  group: "example-app"
+  image: docker.io/zz35/tony-server
+  port: 80
